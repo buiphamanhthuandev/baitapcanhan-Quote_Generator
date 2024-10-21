@@ -25,12 +25,21 @@
 }
 .mobile{
   display: none;
+
 }
+
+.buttonAction{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .buttonAction p{
   width: 24px;
   height: 24px;
 }
-button{
+.buttonAction button{
+  color: hsl(217, 19%, 38%);
   width: 50px;
   height: 50px;
   border-radius: 50%;
@@ -61,4 +70,61 @@ button{
     height: 300px;
   }
 
+}
+.favorites-list{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  text-align: center;
+  border-radius: 10px;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+  background-color: hsl(193, 38%, 86%);
+  width: 500px;
+  
+}
+.favorites-header{
+  display: flex;
+  align-items: center;
+  justify-content: left;
+}
+
+.favorites-header button{
+  width: 90px;
+  height: 30px;
+  margin-right: 10px;
+}
+
+.favorites-main{
+  border: 1px solid black;
+}
+.favorites-main .favorites-main-item{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid black;
+}
+
+
+/* Advice input */
+.AdviceInputSearch .AdviceInput{
+
+}
+
+.AdviceInputSearch .AdviceInput input{
+  width: 300px;
+  height: 30px;
+}
+
+.AdviceInputSearch .AdviceInput button{
+  height: 35px;
+}
+
+.AdviceInputSearch .AdviceSearch input{
+  width: 300px;
+  height: 30px;
+}
+
+.AdviceInputSearch .AdviceSearch button{
+  height: 35px;
 }

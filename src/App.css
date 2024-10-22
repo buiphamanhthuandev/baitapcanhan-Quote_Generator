@@ -13,7 +13,7 @@
 }
 .content{
   font-size: 28px;
-  height: 75%;
+  height: 70%;
 }
 .title{
   color: hsl(150, 100%, 66%);
@@ -29,6 +29,7 @@
 }
 
 .buttonAction{
+  height: 30%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -79,7 +80,7 @@
   text-align: center;
   border-radius: 10px;
   box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
-  background-color: hsl(193, 38%, 86%);
+  background-color: hsl(150, 100%, 66%);
   width: 500px;
   
 }
@@ -107,7 +108,9 @@
 
 
 /* Advice input */
-.AdviceInputSearch .AdviceInput{
+.AdviceInputSearch > button{
+  position: absolute;
+  left: 0;
 
 }
 

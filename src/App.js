@@ -1,9 +1,12 @@
 
 import { useEffect, useState } from 'react';
+
 import './App.css';
 import {AdviceList} from './AdviceList';
 import {AdviceActions} from './AdviceActions';
 import {AdviceInput} from './AdviceInput';
+import { FavoriteAdviceList } from './FavoriteAdviceList';
+
 function App() {
   const quoteList = [
     {id : "1",name :"Keep up the good work!",state:"true"},
@@ -34,10 +37,19 @@ function App() {
     };
     setAdviceList([...adviceList,newAdvideObj]);
   }
+  //state store search advice
+  const [adviceSearch,setAdviceSearch] = useState(()=>{
+    const data = JSON.parse(localStorage.getItem("adviceSearch"));
+    return data ? data : [];
+  });
+  //update localstorage advice search changes
+  useEffect(()=>{
+    localStorage.setItem("adviceSearch",JSON.stringify(adviceSearch));
+  },[adviceSearch]);
   //function search advice in advicelist
   const searchAdviceList = (searchAdvice) => {
-    const tmp = adviceList.find(advice => advice.name.toLowerCase() === searchAdvice.toLowerCase());
-    return tmp;
+    const tmp = adviceList.filter(advice => advice.name.toLowerCase().includes(searchAdvice.toLowerCase()));
+    setAdviceSearch(tmp);
   }
   //
   const favouriteAdvices = [
@@ -107,24 +119,30 @@ function App() {
   }
 
 
-  //Sự kiện danh sách yêu thích 
+  //even show favorites
   const [showFavorites,setShowFavorites] = useState(false);
 
-  //Hàm xử lý khi nhấn nút danh sách 
+  //function show list advice favorite
   const toggleFavorites = () =>{
     const temp = !showFavorites
     setShowFavorites(temp);
   }
 
-  //Sự kiện thêm và search lời khuyên 
+  //even add and search advice
   const [showAdviceInput,setShowAdviceInput] = useState(false);
-  //Hàm xử lý khi nhấn nút thêm lời khuyên
+  //function button add advice
   const toggleAdviceInput = () => {
     const temp = !showAdviceInput;
     setShowAdviceInput(temp);
   }
+  //even search input 
+  const [showAdviceSearch,setShowAdviceSearch] = useState(false);
+  const toggleAdviceSearch = () => {
+    const temp = !showAdviceSearch;
+    setShowAdviceSearch(temp);
+  }
 
-  //hàm chia sẽ lời khuyên 
+  //function share advice
   const handleShare = () => {
     if (navigator.share && currentAdvice) {
       navigator.share({
@@ -138,11 +156,8 @@ function App() {
 
   return (
     <div>
-      
-      
       {!showFavorites ? (
         <>
-
           {!showAdviceInput ? (
             <div className='card'>
               <AdviceList currentAdvice={currentAdvice} handleRandomAdvice={handleRandomAdvice}/>
@@ -156,31 +171,24 @@ function App() {
             </div>
           ) : (
             <div className='favorites-list'>
-              <AdviceInput addAdviceList={addAdviceList} searchAdviceList={searchAdviceList} toggleAdviceInput={toggleAdviceInput}/>
+              <AdviceInput 
+                addAdviceList={addAdviceList} 
+                searchAdviceList={searchAdviceList} 
+                toggleAdviceInput={toggleAdviceInput}
+                toggleAdviceSearch={toggleAdviceSearch}
+                showAdviceSearch={showAdviceSearch}
+                adviceSearch={adviceSearch}
+                />
             </div>
           )}
         </>
         
       ):(
-        <div className='favorites-list'>
-          <div className='favorites-header'>
-            <button onClick={toggleFavorites}>← Trở về</button>
-            <h3>Danh sách lời khuyên yêu thích!</h3>
-          </div>
-          <div className='favorites-main'>
-            {favouriteAdvice && favouriteAdvice.length > 0 ? (
-              favouriteAdvice.map(advice => (
-                <div key={advice.id} className='favorites-main-item'>
-                  <h5>#{advice.id}</h5>
-                  <h4>{advice.name}</h4>
-                  <button onClick={() => {removeFavouriteAdvice(advice.id)}}>Xóa</button>
-                </div>
-              ))
-            ) : (
-              <p>Lời khuyên yêu thích không có!</p>
-            )}
-          </div>
-        </div>
+        <FavoriteAdviceList 
+            toggleFavorites={toggleFavorites} 
+            favouriteAdvice={favouriteAdvice}
+            removeFavouriteAdvice={removeFavouriteAdvice}
+        />
       )}
     </div>
     

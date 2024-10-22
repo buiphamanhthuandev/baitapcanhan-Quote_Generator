@@ -1,3 +1,8 @@
+import { GiPerspectiveDiceSixFacesRandom } from "react-icons/gi";
+import { FaHeart } from "react-icons/fa";
+import { MdOutlinePostAdd } from "react-icons/md";
+import { PiListHeart } from "react-icons/pi";
+import { FaShareAlt } from "react-icons/fa";
 export const AdviceActions = (props)=>{
     const randomAdvice = props.randomAdvice;
     const toggleFavorites = props.toggleFavorites;
@@ -6,11 +11,11 @@ export const AdviceActions = (props)=>{
     const toggleAdviceInput = props.toggleAdviceInput;
     return (
         <div className="buttonAction">
-            <button id="text" onClick={randomAdvice}><span>rdom</span></button>
-            <button id="text" onClick={addFavouriteAdvice}><span>Yêu thích</span> </button>
-            <button id="text" onClick={toggleFavorites}><span>List</span> </button>
-            <button id="text" onClick={handleShare}><span>Chia sẽ</span> </button>
-            <button id="text" onClick={toggleAdviceInput}><span>Thêm</span> </button>
+            <button id="text" onClick={randomAdvice}><GiPerspectiveDiceSixFacesRandom style={{ fontSize: '27px' }}/></button>
+            <button id="text" onClick={addFavouriteAdvice}><FaHeart style={{ fontSize: '24px' }}/></button>
+            <button id="text" onClick={toggleFavorites}><PiListHeart style={{ fontSize: '24px' }}/></button>
+            <button id="text" onClick={handleShare}><FaShareAlt style={{ fontSize: '24px' }}/></button>
+            <button id="text" onClick={toggleAdviceInput}><MdOutlinePostAdd style={{ fontSize: '27px' }}/></button>
         </div>
     )   
 }

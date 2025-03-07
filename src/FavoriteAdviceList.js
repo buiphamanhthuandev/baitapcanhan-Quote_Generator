@@ -1,4 +1,5 @@
 import { ImExit } from "react-icons/im";
+import { MdDeleteForever } from "react-icons/md";
 export const FavoriteAdviceList = (props) => {
     const {toggleFavorites,favouriteAdvice,removeFavouriteAdvice} = props;
     return (
@@ -13,7 +14,7 @@ export const FavoriteAdviceList = (props) => {
                     <div key={advice.id} className='favorites-main-item'>
                         <h5>#{advice.id}</h5>
                         <h4>{advice.name}</h4>
-                        <button onClick={() => {removeFavouriteAdvice(advice.id)}}>Xóa</button>
+                        <button onClick={() => {removeFavouriteAdvice(advice.id)}}><MdDeleteForever style={{ fontSize: '24px' }}/></button>
                     </div>
                     ))
                 ) : (
